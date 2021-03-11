@@ -41,5 +41,16 @@ run GUI
   ./gradlew runGui
 ```
 
+build
+```
+  ./gradlew build
+```
 
+## Debug in IntelliJ
 
+http://benjaminhuanghuang.blogspot.com/2020/09/how-to-run-build-debug-jmeter-in.html
+
+GUI entry: 
+```
+  java/org/apache/jmeter/NewDriver.java
+```
