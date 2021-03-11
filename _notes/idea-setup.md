@@ -12,7 +12,7 @@ With Apache JMeter 5.2 the sources have been migrated to Git.
 Building JMeter
   - https://jmeter.apache.org/building.html
 
-  -https://github.com/apache/jmeter/blob/master/CONTRIBUTING.md#intellij
+  - https://github.com/apache/jmeter/blob/master/CONTRIBUTING.md#intellij
 
 
 ```
@@ -40,4 +40,6 @@ run GUI
 ```
   ./gradlew runGui
 ```
+
+
 
