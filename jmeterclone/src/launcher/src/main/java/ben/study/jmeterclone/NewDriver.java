@@ -38,8 +38,9 @@ public final class NewDriver {
     static {
         final List<URL> jars = new ArrayList<>();
         /*?
-
-         */
+            Path used to find directories and JAR archives containing class files.
+            defined by -cp parameter or environment variable.
+        */
         final String initiaClasspath = System.getProperty(JAVA_CLASS_PATH);
 
         // Find JMeter home dir from the initial classpath
@@ -69,8 +70,8 @@ public final class NewDriver {
         if (tmpDir == null) {
             tmpDir = System.getenv("JMETER_HOME");
         }
-        JMETER_INSTALLATION_DIRECTORY = tmpDir;
-
+        //JMETER_INSTALLATION_DIRECTORY = tmpDir;
+        JMETER_INSTALLATION_DIRECTORY = "/Users/bhuang/study/jmeter";
         /*
          * Does the system support UNC paths? If so, may need to fix them up
          * later
@@ -83,6 +84,7 @@ public final class NewDriver {
                 new File(JMETER_INSTALLATION_DIRECTORY + File.separator + "lib" + File.separator + "ext"),// $NON-NLS-1$ $NON-NLS-2$
                 new File(JMETER_INSTALLATION_DIRECTORY + File.separator + "lib" + File.separator + "junit")};// $NON-NLS-1$ $NON-NLS-2$
         for (File libDir : libDirs) {
+            // get the .jar files under libDir
             File[] libJars = libDir.listFiles((dir, name) -> name.endsWith(".jar"));
             if (libJars == null) {
                 new Throwable("Could not access " + libDir).printStackTrace(); // NOSONAR No logging here
@@ -111,8 +113,11 @@ public final class NewDriver {
             }
         }
 
-        // ClassFinder needs the classpath
+        // ClassFinder needs the classpath, set "java.class.path"
         System.setProperty(JAVA_CLASS_PATH, initiaClasspath + classpath.toString());
+        /*?
+
+         */
         loader = AccessController.doPrivileged(
                 (PrivilegedAction<DynamicClassLoader>) () ->
                         new DynamicClassLoader(jars.toArray(new URL[jars.size()]))
